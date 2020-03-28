@@ -17,6 +17,7 @@ struct Answer
 struct Questions
 {
 	string question1;
+	string trueAnswer;
 	Answer *answer;
 };
 

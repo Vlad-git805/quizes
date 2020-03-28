@@ -241,6 +241,7 @@ void init()
 						{
 							fin >> getQuiz.question[i].answer[j].answer1;
 						}
+						fin >> getQuiz.question[i].trueAnswer;
 					}
 				}
 				else
@@ -294,14 +295,16 @@ void addQuiz()
 			{
 				cout << "enter " << i + 1 << " question" << endl;
 				cin >> temp[countQuiz].question[i].question1;
-				cout << "Enter count of enswers" << endl;
+				cout << "Enter count of nott correct enswers" << endl;
 				cin >> tempCountOfAnswers[countQuiz];
 				temp[countQuiz].question[i].answer = new Answer[tempCountOfAnswers[countQuiz]];
 				for (int j = 0; j < tempCountOfAnswers[countQuiz]; j++)
 				{
-					cout << "Enter " << j + 1 << " answer" << endl;
+					cout << "Enter " << j + 1 << " not correct answer" << endl;
 					cin >> temp[countQuiz].question[i].answer[j].answer1;
 				}
+				cout << "Enter correct answer" << endl;
+				cin >> temp[countQuiz].question[i].trueAnswer;
 			}
 			//cout << temp[countQuiz].nameQuiz << endl;// запис у файл
 			//for (int i = 0; i < newCountOfQuestions[coq]; i++)
@@ -325,6 +328,7 @@ void addQuiz()
 				{
 					fout << temp[countQuiz].question[i].answer[j].answer1 << endl;
 				}
+				fout << temp[countQuiz].question[i].trueAnswer;
 			}
 
 			fout.close();
@@ -386,16 +390,16 @@ void passTheQuiz()
 				{
 					cout << quiz[i].question[j].answer[k].answer1 << ";\t";
 				}
+				cout << quiz[i].question[j].trueAnswer << ";\t";
 				//cout << quiz[i].question[j].trueAnswer1 << ";\t";
 				cout << " Enter result: ";
 				cin >> result;
-				for (int k = 0; k < countOfAnswers[i]; k++)
+				
+				if (result == quiz[i].question[j].trueAnswer)
 				{
-					if (result == quiz[i].question[j].answer[k].answer1)
-					{
-						countResult++;
-					}
+					countResult++;
 				}
+				
 			}
 			cout << "You have " << countResult << " right answer" << endl;
 		}
@@ -430,6 +434,7 @@ void allinfoInArr()
 			{
 				cout << quiz[i].question[j].answer[k].answer1 << endl;
 			}
+			cout << quiz[i].question[j].trueAnswer << endl;
 		}
 	}
 	cout << endl;
